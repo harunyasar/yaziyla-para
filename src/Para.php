@@ -8,6 +8,7 @@ class Para
     private $digits = [null, 'bin', 'milyon', 'milyar', 'trilyon', 'katrilyon', 'kentilyon', 'seksilyon', 'septilyon'];
     private $one_digit = [null, 'bir', 'iki', 'üç', 'dört', 'beş', 'altı', 'yedi', 'sekiz', 'dokuz'];
     private $two_digits = [null, 'on', 'yirmi', 'otuz', 'kırk', 'elli', 'altmış', 'yetmiş', 'seksen', 'doksan'];
+    private $word_speaker = [1 => 'one_digit_text', 2 => 'two_digit_text', 3 => 'three_digit_text'];
     public $text;
 
     public function __construct($number)
@@ -54,24 +55,24 @@ class Para
         }
     }
 
-    private function say_1_digit_text($n)
+    private function one_digit_text($n)
     {
         return $this->one_digit[$n];
     }
 
-    private function say_2_digit_text($n)
+    private function two_digit_text($n)
     {
-        return $this->two_digits[$n[0]] . $this->say_1_digit_text($n[1]);
+        return $this->two_digits[$n[0]] . $this->one_digit_text($n[1]);
     }
 
-    private function say_3_digit_text($n)
+    private function three_digit_text($n)
     {
-        $one = $n[0] == 1 ? 'yüz' : $this->say_1_digit_text($n[0]);
+        $one = $n[0] == 1 ? 'yüz' : $this->one_digit_text($n[0]);
         if ($n[0] != 1 || $n[0] != 0) {
             $one .= 'yüz';
         }
         array_shift($n);
-        return $one . $this->say_2_digit_text($n);
+        return $one . $this->two_digit_text($n);
     }
 
     private function convert_to_text($number)
@@ -79,23 +80,12 @@ class Para
         $number = intval($number);
         $text = '';
         $i = 0;
-        $new_text = '';
         while($number) {
             list($number, $r) = array(intval($number / 1000), $number % 1000);
             $size = count(str_split(strval($r)));
             $arg = $size == 1 ? $r : array_map('intval', str_split(strval($r)));
 
-            if($size == 1) {
-                $new_text = ($r == 1 && $i == 1) ? '' : $this->say_1_digit_text($arg);
-            }
-
-            if($size == 2) {
-                $new_text = ($r == 1 && $i == 1) ? '' : $this->say_2_digit_text($arg);
-            }
-
-            if($size == 3) {
-                $new_text = ($r == 1 && $i == 1) ? '' : $this->say_3_digit_text($arg);
-            }
+            $new_text = ($r == 1 && $i == 1) ? '' : $this->{$this->word_speaker[$size]}($arg);
 
             if($r != 0) {
                 $new_text .= $this->digits[$i];
