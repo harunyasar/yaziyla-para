@@ -16,7 +16,7 @@ class Para
         $this->number = $number;
         $minus = $this->number < 0;
 
-        if($minus) {
+        if ($minus) {
             $this->number *= -1;
         }
 
@@ -34,21 +34,21 @@ class Para
     private function convert_price()
     {
         $this->text = $this->convert_to_text($this->price);
-        if($this->text) {
+        if ($this->text) {
             $this->text .= 'TL';
         }
     }
 
     private function convert_cents()
     {
-        if($this->cents && intval($this->cents) > 0) {
-            if(strlen($this->cents) == 1) {
+        if ($this->cents && intval($this->cents) > 0) {
+            if (strlen($this->cents) == 1) {
                 $this->cents = strval((intval($this->cents) * 10));
             }
-            if(strlen($this->cents) > 2) {
+            if (strlen($this->cents) > 2) {
                 $this->cents = substr($this->cents, 0, 2);
             }
-            if($this->text) {
+            if ($this->text) {
                 $this->text .= ',';
             }
             $this->text .= $this->convert_to_text($this->cents) . 'kr.';
@@ -80,14 +80,14 @@ class Para
         $number = intval($number);
         $text = '';
         $i = 0;
-        while($number) {
+        while ($number) {
             list($number, $r) = array(intval($number / 1000), $number % 1000);
             $size = count(str_split(strval($r)));
             $arg = $size == 1 ? $r : array_map('intval', str_split(strval($r)));
 
             $new_text = ($r == 1 && $i == 1) ? '' : $this->{$this->word_speaker[$size]}($arg);
 
-            if($r != 0) {
+            if ($r != 0) {
                 $new_text .= $this->digits[$i];
             }
 
