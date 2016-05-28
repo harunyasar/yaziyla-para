@@ -65,7 +65,7 @@ class Para
                 $this->cents = substr($this->cents, 0, 2);
             }
             if ($this->text) {
-                $this->text .= ',';
+                $this->text .= ', ';
             }
             $this->text .= $this->convert_to_text($this->cents) . 'kr.';
         }
@@ -78,7 +78,7 @@ class Para
      */
     private function one_digit_text($n)
     {
-        return $this->one_digit[$n];
+        return $this->one_digit[$n] . ' ';
     }
 
     /**
@@ -88,7 +88,7 @@ class Para
      */
     private function two_digit_text($n)
     {
-        return $this->two_digits[$n[0]] . $this->one_digit_text($n[1]);
+        return $this->two_digits[$n[0]] . ' ' . $this->one_digit_text($n[1]) . ' ';
     }
 
     /**
@@ -98,12 +98,12 @@ class Para
      */
     private function three_digit_text($n)
     {
-        $one = $n[0] == 1 ? 'yüz' : $this->one_digit_text($n[0]);
+        $one = $n[0] == 1 ? 'yüz ' : $this->one_digit_text($n[0]) . ' ';
         if ($n[0] != 1 || $n[0] != 0) {
-            $one .= 'yüz';
+            $one .= 'yüz ';
         }
         array_shift($n);
-        return $one . $this->two_digit_text($n);
+        return $one . ' ' . $this->two_digit_text($n) . ' ';
     }
 
     /**
@@ -127,7 +127,7 @@ class Para
                 $new_text .= $this->digits[$i];
             }
 
-            $text = $new_text . $text;
+            $text = $new_text . ' ' . $text . ' ';
 
             $i += 1;
         }
