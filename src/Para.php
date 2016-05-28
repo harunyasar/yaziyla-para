@@ -38,7 +38,7 @@ class Para
         $this->convert_price();
         $this->convert_cents();
 
-        $this->text = (($minus) ? 'eksi ' : '') . $this->text;
+        $this->text = ucwords((($minus) ? 'eksi ' : '') . $this->text);
     }
 
     /**
@@ -99,7 +99,7 @@ class Para
     private function three_digit_text($n)
     {
         $one = $n[0] == 1 ? 'yüz ' : $this->one_digit_text($n[0]) . ' ';
-        if ($n[0] != 1 || $n[0] != 0) {
+        if ($n[0] != 1 && $n[0] != 0) {
             $one .= 'yüz ';
         }
         array_shift($n);
