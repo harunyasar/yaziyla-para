@@ -2,6 +2,14 @@
 
 Para bilgisini yazıya çeviren küçük bir sınıf
 
+## Install
+
+Via Composer
+
+``` bash
+$ composer require harunyasar/yaziyla-para
+```
+
 ## Usage
 
 ``` php
