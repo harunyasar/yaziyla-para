@@ -14,7 +14,7 @@ $ composer require harunyasar/yaziyla-para
 
 ``` php
 $para = new Para(21315.25);
-echo $para->text; # yirmibirbinüçyüzonbeşTL,yirmibeşkr.
+echo $para->text; # yirmi bir bin üç yüz on beş TL, yirmi beş kr.
 ```
 
 ## Credits
