@@ -19,7 +19,7 @@ class Para
 
     /**
      * Para constructor
-     * @param $number Kelimelere çevirilecek olan sayı
+     * @param mixed $number Kelimelere çevirilecek olan sayı
      */
     public function __construct($number)
     {
