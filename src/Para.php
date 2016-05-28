@@ -2,6 +2,12 @@
 
 namespace harunyasar\YaziylaPara;
 
+/**
+ * Class Para
+ * Türk Lirasını okunuşuna çevir
+ * @package harunyasar/yaziyla-para
+ * @see     https://github.com/harunyasar/yaziyla-para
+ */
 class Para
 {
 
@@ -11,6 +17,10 @@ class Para
     private $word_speaker = [1 => 'one_digit_text', 2 => 'two_digit_text', 3 => 'three_digit_text'];
     public $text;
 
+    /**
+     * Para constructor
+     * @param $number Kelimelere çevirilecek olan sayı
+     */
     public function __construct($number)
     {
         $this->number = $number;
@@ -31,6 +41,9 @@ class Para
         $this->text = (($minus) ? 'eksi ' : '') . $this->text;
     }
 
+    /**
+     * Lira hesap et ve kelimelere çevir
+     */
     private function convert_price()
     {
         $this->text = $this->convert_to_text($this->price);
@@ -39,6 +52,9 @@ class Para
         }
     }
 
+    /**
+     * Kuruş tespit et ve kelimelere çevir
+     */
     private function convert_cents()
     {
         if ($this->cents && intval($this->cents) > 0) {
@@ -55,16 +71,31 @@ class Para
         }
     }
 
+    /**
+     * Tek basamaklı sayıları söyle
+     * @param array $n Tek basamaklı sayı
+     * @return mixed
+     */
     private function one_digit_text($n)
     {
         return $this->one_digit[$n];
     }
 
+    /**
+     * İki basamaklı sayıları söyle
+     * @param array $n İki basamaklı sayı
+     * @return mixed
+     */
     private function two_digit_text($n)
     {
         return $this->two_digits[$n[0]] . $this->one_digit_text($n[1]);
     }
 
+    /**
+     * Üç basamaklı sayıları söyle
+     * @param array $n Üç basamaklı sayı
+     * @return mixed
+     */
     private function three_digit_text($n)
     {
         $one = $n[0] == 1 ? 'yüz' : $this->one_digit_text($n[0]);
@@ -75,6 +106,11 @@ class Para
         return $one . $this->two_digit_text($n);
     }
 
+    /**
+     * Sayıları kelimelere çevir
+     * @param int $number Okunacak olan sayı
+     * @return string
+     */
     private function convert_to_text($number)
     {
         $number = intval($number);
