@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "harunyasar\\yaziylapara\\": "src"
+            "harunyasar\\YaziylaPara\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "harunyasar\\yaziylapara\\": "tests"
+            "harunyasar\\YaziylaPara\\": "tests"
         }
     },
     "scripts": {
