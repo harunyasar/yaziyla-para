@@ -38,7 +38,7 @@ class Para
         $this->convert_price();
         $this->convert_cents();
 
-        $this->text = ucwords((($minus) ? 'eksi ' : '') . $this->text);
+        $this->text = (($minus) ? 'eksi ' : '') . $this->text;
     }
 
     /**
