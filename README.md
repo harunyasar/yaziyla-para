@@ -1,6 +1,7 @@
 # Yaziyla-Para
 
 Para bilgisini yazıya çeviren küçük bir sınıf
+https://github.com/lab2023/parayaz Ruby deposundan PHP'ye devşirilmiştir
 
 ## Install
 
